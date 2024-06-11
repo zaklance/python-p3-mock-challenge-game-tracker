@@ -84,6 +84,22 @@ class Player:
             if result.game is game:
                 count += 1
         return count
+    
+    @classmethod
+    def highest_score(cls, game):
+        players = game.players()
+        if len(players) == 0:
+            return None
+        max_player = players[0]
+        max_player_avg = game.average_score(max_player)
+        for player in players:
+            avg = game.average_score(player)
+            if avg > max_player_avg:
+                max_player = player
+                max_player_avg = avg
+        return max_player
+        # return max(players, key=lambda player: game.average_score(player))
+        
                 
     def __repr__(self):
         return f'<Player {self.username}>'
